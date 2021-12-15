@@ -6,26 +6,30 @@ import NumberInput from './components/NumberInput';
 import Checkbox from './components/Checkbox';
 import Select from './components/Select';
 import RadioButton from './components/RadioButton';
+import ProductTags from './components/ProductTags';
 
 function App() {
   const initialProduct = {
     name: '',
     price: 0,
     isDecorated: false,
+    colorName: '',
     category: '',
     packageSize: '',
     contactEmail: '',
+    tags: [],
   };
   const [product, setProduct] = useState(initialProduct);
 
   const [products, setProducts] = useState([]);
 
   const categories = [
-    'Tee',
-    'Lebkuchen',
-    'Kekse',
+    'Drinks',
+    'Food',
+    'Sweet',
     'Adventskalender',
-    'Liköre & Spirituosen',
+    'Souenir',
+    'Alcohol'
   ];
 
   const handleChange = (event) => {
@@ -45,6 +49,15 @@ function App() {
     });
   };
 
+  function updateTags(newTag) {
+    if (product.tags.includes(newTag)) {
+      const newTags = product.tags.filter((oldTag) => oldTag !== newTag);
+      setProduct({...product, tags: newTags})
+    } else {
+      setProduct({...product, tags: [...product.tags, newTag]});
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setProducts([...products, product]);
@@ -63,6 +76,13 @@ function App() {
           <h3>
             <span>Product Name</span>
           </h3>
+        </TextInput>
+
+        <TextInput 
+        onTextInputChange={handleChange}
+        name='colorName'
+        placeholder='Add a color'>
+          <h3>Color</h3>
         </TextInput>
 
         <InputRow>
@@ -108,6 +128,8 @@ function App() {
           Contact Email
         </TextInput>
 
+        <ProductTags label="Product Tags" tags={product.tags} onUpdateTags={updateTags} />
+
         <div>
           <button>Add Product</button>
           {/* Optional */}
@@ -133,7 +155,7 @@ export default App;
 
 const Container = styled.div`
   max-width: 24rem;
-  margin: 0 auto;
+  margin: 20px 300px 50px 20px;
 `;
 
 const InputRow = styled.div`

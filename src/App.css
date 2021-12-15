@@ -4,6 +4,10 @@
 
 body {
   font-family: sans-serif;
-  background: #004225;
+  background: rgba(95, 5, 5, 0.945);
+  background-image: url(./components/img/Christmas-Tree-Gift-PNG-Clipart.png);
+  background-repeat: no-repeat;
+  background-position: right;
   color: white;
 }
+
