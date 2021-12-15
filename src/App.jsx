@@ -8,7 +8,35 @@ import Select from './components/Select';
 import RadioButton from './components/RadioButton';
 import ProductTags from './components/ProductTags';
 
-function App() {
+const Container = styled.div`
+  max-width: 24rem;
+  margin: 20px 300px 50px 20px;
+`;
+
+const InputRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  input {
+    padding: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+`;
+
+const Article = styled.article`
+border: 1px solid white;
+width: 150px;
+padding: 10px;
+margin: 15px;
+`
+
+export default function App() {
   const initialProduct = {
     name: '',
     price: 0,
@@ -92,7 +120,7 @@ function App() {
               value={product.price}
               onNumberInputChange={handleChange}
             >
-              Price (in €)
+              <h3>Price (in €)</h3>
             </NumberInput>
           </div>
 
@@ -139,37 +167,17 @@ function App() {
         </div>
       </Form>
 
-      {products.map((product) => (
-        <article>
-          <h3>{product.name}</h3>
+      {products.map((productItem) => (
+        <Article>
+          <h3>{productItem.name}</h3>
           <p>
-            {product.category} // {product.price} €
+          Category: {productItem.category} / {productItem.price} € 
           </p>
-        </article>
+          <p>
+            {productItem.packageSize} / {productItem.tags}
+          </p>
+        </Article>
       ))}
     </Container>
   );
 }
-
-export default App;
-
-const Container = styled.div`
-  max-width: 24rem;
-  margin: 20px 300px 50px 20px;
-`;
-
-const InputRow = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Form = styled.form`
-  label {
-    display: block;
-    font-weight: bold;
-  }
-  input {
-    padding: 0.25rem;
-    margin-bottom: 0.5rem;
-  }
-`;
